@@ -34,10 +34,11 @@ export const WorldMapWrapper = (props) => {
       minZoom={3}
       maxBoundsViscosity={1}
       scrollWheelZoom={false}
+      attributionControl={false}
       maxBounds={[
         [
-          [-90, -180],
-          [90, 180],
+          [-60, -180],
+          [84, 180],
         ],
       ]}
     >
