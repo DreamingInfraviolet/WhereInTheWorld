@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import { MenuItem } from "./menu-item";
 
 const Container = styled.div`
   display: flex;
@@ -24,18 +25,6 @@ const MenuItemContainer = styled.div`
   overflow-y: scroll;
 `;
 
-const MenuItem = styled.div`
-  background: #222;
-  width: 100%;
-  height: 5em;
-  border: 1px solid #000;
-  border-top: 0;
-  border-left: 0;
-  border-right: 0;
-  margin-top: 5px;
-  margin-bottom: 5px;
-`;
-
 const BottomButtonContainer = styled.div`
   flex-basis: 5%;
   width: 100%;
@@ -55,22 +44,55 @@ const AddButton = styled.button`
   display: block;
 `;
 
-const ButtonText = styled.span`
-`;
+const ButtonText = styled.span``;
 
 export const Menu = (props) => {
+  const [menuItems, setMenuItems] = useState([
+    {
+      id: 0,
+      title: "Title 0",
+      priority: 6,
+      setPriority: (priority) =>
+        setMenuItems((menuItems) => [
+          { ...menuItems[0], priority },
+          menuItems[1],
+          menuItems[2],
+        ]),
+    },
+    {
+      id: 1,
+      title: "Title 1",
+      priority: 3,
+      setPriority: (priority) =>
+        setMenuItems((menuItems) => [
+          menuItems[0],
+          { ...menuItems[1], priority },
+          menuItems[2],
+        ]),
+    },
+    {
+      id: 2,
+      title: "Title 2",
+      priority: 10,
+      setPriority: (priority) =>
+        setMenuItems((menuItems) => [
+          menuItems[0],
+          menuItems[1],
+          { ...menuItems[2], priority },
+        ]),
+    },
+  ]);
   return (
     <Container>
       <MenuItemContainer>
-        <MenuItem />
-        <MenuItem />
-        <MenuItem />
-        <MenuItem />
-        <MenuItem />
-        <MenuItem />
-        <MenuItem />
-        <MenuItem />
-        <MenuItem />
+        {menuItems.map((item) => (
+          <MenuItem
+            key={item.id}
+            title={item.title}
+            priority={item.priority}
+            setPriority={item.setPriority}
+          />
+        ))}
       </MenuItemContainer>
       <BottomButtonContainer>
         <AddButton>
