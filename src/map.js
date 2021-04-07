@@ -1,5 +1,5 @@
 import { MapContainer, TileLayer, GeoJSON } from "react-leaflet";
-import countriesLayer from "./borders-low.json";
+import countriesLayer from "./borders/borders-low.json";
 // import l from 'leaflet-providers';
 
 const countryStyle = {

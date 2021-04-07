@@ -7,6 +7,8 @@ const range = (n) => [...Array(n + 1).keys()];
 
 const lerp = (x, y, a) => x * (1 - a) + y * a;
 
+const DraggableItemContainer = styled.div``;
+
 const MenuItemDiv = styled.div`
   position: relative;
   background: #222;
@@ -62,12 +64,14 @@ const PrioritySlider = ({ priority, setPriority }) => {
   );
 };
 
-export const MenuItem = ({ title, onClose, priority, setPriority, ...rest }) => {
+export const MenuItem = React.forwardRef(({ title, onClose, priority, setPriority, ...rest }, ref) => {
   return (
-    <MenuItemDiv {...rest}>
-      <CloseButton onClick={onClose}>x</CloseButton>
-      <Title>{title}</Title>
-      <PrioritySlider priority={priority} setPriority={setPriority} />
-    </MenuItemDiv>
+    <DraggableItemContainer {...rest} ref={ref}>
+      <MenuItemDiv>
+        <CloseButton onClick={onClose}>x</CloseButton>
+        <Title>{title}</Title>
+        <PrioritySlider priority={priority} setPriority={setPriority} />
+      </MenuItemDiv>
+    </DraggableItemContainer>
   );
-};
+});
